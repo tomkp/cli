@@ -5,9 +5,20 @@ const i = require('i')();
 
 const hocTemplateSimple = name => `import React from 'react';\nimport './${i.dasherize(i.underscore(name))}.scss';\n\nexport default ({ children }) => <div className="${name}">{ children }</div>;`;
 
-const hocTemplateDeepChildren = name => {
+const hocTemplateDeepChildren = (program, name) => {
   const scss = i.dasherize(i.underscore(name));
-  return `import React from 'react';\nimport './${scss}.scss';\n\nconst ${name} = ({ children }) => { \n\treturn (\n\t\t<div className="${name}">\n\t\t\t{ children }\n\t\t</div>\n\t);\n};\nexport default ${name};`;
+  const contents =
+    `import React from 'react';\n` +
+    `import './${scss}.scss';\n\n` +
+    `const ${name} = ({ children }) => { \n` +
+    `\treturn (\n` +
+    `\t\t<div className="${name}">\n` +
+    `\t\t\t{ children }\n` +
+    `\t\t</div>\n` +
+    `\t);\n` +
+    `};\n` +
+    `export default ${name};`;
+  return contents;
 };
 
 const scssTemplate = (scss, name) => {
@@ -18,12 +29,13 @@ const scssTemplate = (scss, name) => {
 program
   .arguments('<name>')
   .option('-t, --trial')
+  .option('-c, --colors')
   // .option('-p, --password <password>', 'The user\'s password')
   .action(function (name) {
     console.log(`Create higher order component '${name}'`);
 
     const scss = i.dasherize(i.underscore(name));
-    const hocFileContents = hocTemplateDeepChildren(name);
+    const hocFileContents = hocTemplateDeepChildren(program, name);
     const scssFileContents = scssTemplate(scss, name);
 
     console.log(`${hocFileContents}`);
@@ -42,4 +54,3 @@ program
   .parse(process.argv);
 
 
-//const x = `import React from 'react';import './${i.tableize(name)}.scss';export default ({ children }) => <div className = "${name}" > { children } < / div >;`;
