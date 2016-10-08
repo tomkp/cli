@@ -11,6 +11,6 @@
     "i": "^0.3.5"
   },
   "bin": {
-    "hoc": "./hoc.js"
+    "hoc": "./src/hoc.js"
   }
 }
