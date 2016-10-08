@@ -16,7 +16,9 @@ const hocTemplateDeepChildren = (program, name) => {
     `\t\t\t{ children }\n` +
     `\t\t</div>\n` +
     `\t);\n` +
-    `};\n` +
+    `};\n\n` +
+    `${name}.propTypes = {\n` +
+    `};\n\n` +
     `export default ${name};`;
   return contents;
 };
@@ -38,14 +40,17 @@ program
     const hocFileContents = hocTemplateDeepChildren(program, name);
     const scssFileContents = scssTemplate(scss, name);
 
-    console.log(`${hocFileContents}`);
-    console.log(`${scssFileContents}`);
+    const jsFile = `${scss}/${name}.js`;
+    const scssFile = `${scss}/${scss}.js`;
+
+    console.log(`${'-'.repeat(50)}\n${jsFile}:\n${hocFileContents}\n`);
+    console.log(`${'-'.repeat(50)}\n${scssFile}:\n${scssFileContents}\n`);
 
     if (!program.trial) {
-      fse.outputFile(`./${scss}/${name}.js`, hocFileContents, function (err) {
+      fse.outputFile(`./${jsFile}`, hocFileContents, function (err) {
         if (err) console.log(err);
       });
-      fse.outputFile(`./${scss}/${scss}.scss`, scssFileContents, function (err) {
+      fse.outputFile(`./${scssFile}`, scssFileContents, function (err) {
         if (err) console.log(err);
       })
     }
