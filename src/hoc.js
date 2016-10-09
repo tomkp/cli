@@ -41,7 +41,7 @@ program
     const scssFileContents = scssTemplate(scss, name);
 
     const jsFile = `${scss}/${name}.js`;
-    const scssFile = `${scss}/${scss}.js`;
+    const scssFile = `${scss}/${scss}.scss`;
 
     console.log(`${'-'.repeat(50)}\n${jsFile}:\n${hocFileContents}\n`);
     console.log(`${'-'.repeat(50)}\n${scssFile}:\n${scssFileContents}\n`);
