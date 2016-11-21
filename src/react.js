@@ -5,7 +5,20 @@ const i = require('i')();
 
 const statelessTemplateSimple = name => `import React from 'react';\nimport './${i.dasherize(i.underscore(name))}.scss';\n\nexport default ({ children }) => <div className="${name}">{ children }</div>;`;
 
-const statelessTemplateDeepChildren = (program, name) => {
+const statefulTemplate = name => {
+    return  `import React, { Component } from 'react';\n` +
+            `import './${i.dasherize(i.underscore(name))}.scss';\n\n` +
+            `class ${name} extends Component {\n\n` +
+            `\trender() {\n`+
+            `\t\treturn (\n`+
+            `\t\t\t<div className="${name}">\n\n` +
+            `\t\t\t</div>;\n` +
+            `\t\t);\n`+
+            `\t}\n`+
+            `}`;
+};
+
+const statelessTemplateDeepChildren = (name) => {
     const scss = i.dasherize(i.underscore(name));
     const contents =
         `import React from 'react';\n` +
@@ -23,7 +36,7 @@ const statelessTemplateDeepChildren = (program, name) => {
     return contents;
 };
 
-const scssTemplate = (scss, name) => {
+const stylesheetTemplate = (name) => {
     return `.${name} {\n\t\n\n}`;
 };
 
@@ -32,30 +45,33 @@ program
     .arguments('<name>')
     .option('-t, --trial')
     .option('-v, --verbose')
-    .option('-s, --stateless')
+    .option('--stateful', 'Component has state - will extend Component')
     .option('-n, --naked')
+    .option('--suffix <suffix>', 'The stylesheet suffix (css, scss, less etc...)')
     //.option('-c, --colors')
     // .option('-p, --password <password>', 'The user\'s password')
     .action(function (name) {
         console.log(`Create higher order component '${name}'`);
 
-        const scss = i.dasherize(i.underscore(name));
-        const jsFileContents = statelessTemplateDeepChildren(program, name);
-        const scssFileContents = scssTemplate(scss, name);
+        const stylesheetSuffix = program.suffix || 'css';
 
-        const jsFile = `${scss}/${name}.js`;
-        const scssFile = `${scss}/${scss}.scss`;
+        const stylesheet = i.dasherize(i.underscore(name));
+        const jsFileContents = program.state?statefulTemplate(name):statelessTemplateDeepChildren(name);
+        const stylesheetFileContents = stylesheetTemplate(name);
+
+        const jsFile = `${stylesheet}/${name}.js`;
+        const stylesheetFile = `${stylesheet}/${stylesheet}.${stylesheetSuffix}`;
 
         if (program.verbose || program.trial) {
             console.log(`${'-'.repeat(50)}\n${jsFile}:\n${jsFileContents}\n`);
-            console.log(`${'-'.repeat(50)}\n${scssFile}:\n${scssFileContents}\n`);
+            console.log(`${'-'.repeat(50)}\n${stylesheetFile}:\n${stylesheetFileContents}\n`);
         }
 
         if (!program.trial) {
             fse.outputFile(`./${jsFile}`, jsFileContents, function (err) {
                 if (err) console.log(err);
             });
-            fse.outputFile(`./${scssFile}`, scssFileContents, function (err) {
+            fse.outputFile(`./${stylesheetFile}`, stylesheetFileContents, function (err) {
                 if (err) console.log(err);
             })
         }
