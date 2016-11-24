@@ -51,7 +51,7 @@ program
     //.option('-c, --colors')
     // .option('-p, --password <password>', 'The user\'s password')
     .action(function (name) {
-        console.log(`Create higher order component '${name}'`);
+        console.log(`Create component '${name}'`);
 
         const stylesheetSuffix = program.suffix || 'css';
 
