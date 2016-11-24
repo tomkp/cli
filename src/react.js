@@ -3,11 +3,11 @@ const program = require('commander');
 const fse = require('fs-extra');
 const i = require('i')();
 
-const statelessTemplateSimple = name => `import React from 'react';\nimport './${i.dasherize(i.underscore(name))}.scss';\n\nexport default ({ children }) => <div className="${name}">{ children }</div>;`;
+const statelessTemplateSimple = (name, suffix) => `import React from 'react';\nimport './${i.dasherize(i.underscore(name))}.${suffix}';\n\nexport default ({ children }) => <div className="${name}">{ children }</div>;`;
 
-const statefulTemplate = name => {
+const statefulTemplate = (name, suffix) => {
     return  `import React, { Component } from 'react';\n` +
-            `import './${i.dasherize(i.underscore(name))}.scss';\n\n` +
+            `import './${i.dasherize(i.underscore(name))}.${suffix}';\n\n` +
             `class ${name} extends Component {\n\n` +
             `\trender() {\n`+
             `\t\treturn (\n`+
@@ -18,11 +18,11 @@ const statefulTemplate = name => {
             `}`;
 };
 
-const statelessTemplateDeepChildren = (name) => {
-    const scss = i.dasherize(i.underscore(name));
+const statelessTemplateDeepChildren = (name, suffix) => {
+    const stylesheetName = i.dasherize(i.underscore(name));
     const contents =
         `import React from 'react';\n` +
-        `import './${scss}.scss';\n\n` +
+        `import './${stylesheetName}.${suffix}';\n\n` +
         `const ${name} = ({ children }) => { \n` +
         `\treturn (\n` +
         `\t\t<div className="${name}">\n` +
@@ -56,7 +56,10 @@ program
         const stylesheetSuffix = program.suffix || 'css';
 
         const stylesheet = i.dasherize(i.underscore(name));
-        const jsFileContents = program.state?statefulTemplate(name):statelessTemplateDeepChildren(name);
+        const jsFileContents = program.state?
+            statefulTemplate(name, stylesheetSuffix):
+            statelessTemplateDeepChildren(name, stylesheetSuffix);
+
         const stylesheetFileContents = stylesheetTemplate(name);
 
         const jsFile = `${stylesheet}/${name}.js`;
