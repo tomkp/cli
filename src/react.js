@@ -12,7 +12,7 @@ const statefulTemplate = (name, suffix) => {
             `\trender() {\n`+
             `\t\treturn (\n`+
             `\t\t\t<div className="${name}">\n\n` +
-            `\t\t\t</div>;\n` +
+            `\t\t\t</div>\n` +
             `\t\t);\n`+
             `\t}\n`+
             `}`;
