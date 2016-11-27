@@ -15,7 +15,10 @@ const statefulTemplate = (name, suffix) => {
             `\t\t\t</div>\n` +
             `\t\t);\n`+
             `\t}\n`+
-            `}`;
+            `};\n\n` +
+            `${name}.propTypes = {\n` +
+            `};\n\n` +
+            `export default ${name};`;
 };
 
 const statelessTemplateDeepChildren = (name, suffix) => {
