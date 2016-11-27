@@ -56,7 +56,7 @@ program
         const stylesheetSuffix = program.suffix || 'css';
 
         const stylesheet = i.dasherize(i.underscore(name));
-        const jsFileContents = program.state?
+        const jsFileContents = program.stateful?
             statefulTemplate(name, stylesheetSuffix):
             statelessTemplateDeepChildren(name, stylesheetSuffix);
 
