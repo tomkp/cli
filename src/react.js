@@ -46,7 +46,7 @@ const stylesheetTemplate = (name) => {
 
 program
     .arguments('<name>')
-    .option('-t, --trial')
+    .option('-t, --test', 'Log the generated components without any changes to the file system')
     .option('-v, --verbose')
     .option('--stateful', 'Component has state - will extend Component')
     .option('-n, --naked')
