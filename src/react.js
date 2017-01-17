@@ -68,12 +68,12 @@ program
         const jsFile = `${stylesheet}/${name}.js`;
         const stylesheetFile = `${stylesheet}/${stylesheet}.${stylesheetSuffix}`;
 
-        if (program.verbose || program.trial) {
+        if (program.verbose || program.test) {
             console.log(`${'-'.repeat(50)}\n${jsFile}:\n${jsFileContents}\n`);
             console.log(`${'-'.repeat(50)}\n${stylesheetFile}:\n${stylesheetFileContents}\n`);
         }
 
-        if (!program.trial) {
+        if (!program.test) {
             fse.outputFile(`./${jsFile}`, jsFileContents, function (err) {
                 if (err) console.log(err);
             });
