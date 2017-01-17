@@ -1,0 +1,17 @@
+import React, { Component } from 'react';
+import './{{=it.stylesheetName}}.{{=it.stylesheetSuffix}}';
+
+class {{=it.name}} extends Component {
+    render() {
+        return (
+            <div className="{{=it.name}}">
+                XXX
+            </div>
+        );
+    }
+}
+
+{{=it.name}}.propTypes = {
+};
+
+export default {{=it.name}};
