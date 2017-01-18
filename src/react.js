@@ -3,11 +3,12 @@ const program = require('commander');
 const fse = require('fs-extra');
 const i = require('i')();
 const dot = require('dot');
+const path = require('path');
 
 dot.templateSettings.strip = false;
 
 
-const dots = dot.process({ path: "../templates"});
+const dots = dot.process({ path: path.join(__dirname, '..', 'templates') });
 
 
 const statefulTemplate = (name, stylesheetSuffix) => dots.statefulTemplate({
@@ -55,5 +56,3 @@ program
 
     })
     .parse(process.argv);
-
-
