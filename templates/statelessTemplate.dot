@@ -1,0 +1,15 @@
+import React from 'react';
+import './{{=it.stylesheetName}}.{{=it.stylesheetSuffix}}';
+
+const {{=it.name}} => (props) {
+    return (
+        <div className="{{=it.name}}">
+            XXX
+        </div>
+    );
+}
+
+{{=it.name}}.propTypes = {
+};
+
+export default {{=it.name}};

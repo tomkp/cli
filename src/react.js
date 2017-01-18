@@ -17,6 +17,12 @@ const statefulTemplate = (name, stylesheetSuffix) => dots.statefulTemplate({
     name: name,
 });
 
+const statelessTemplate = (name, stylesheetSuffix) => dots.statelessTemplate({
+    stylesheetName: i.dasherize(i.underscore(name)),
+    stylesheetSuffix: stylesheetSuffix,
+    name: name,
+});
+
 const stylesheetTemplate = (name) => {
     return `.${name} {\n\t\n\n}`;
 };
@@ -25,6 +31,7 @@ const stylesheetTemplate = (name) => {
 program
     .arguments('<name>')
     .option('-t, --test', 'Log the generated components without any changes to the file system')
+    .option('-s, --stateless', 'Create stateless React component')
     .option('-v, --verbose')
     .option('--suffix <suffix>', 'The stylesheet suffix (css, scss, less etc...)')
     .action(function (name) {
@@ -33,7 +40,9 @@ program
         const stylesheetSuffix = program.suffix || 'css';
 
         const stylesheet = i.dasherize(i.underscore(name));
-        const jsFileContents = statefulTemplate(name, stylesheetSuffix);
+        const jsFileContents = program.stateless
+          ? statelessTemplate(name, stylesheetSuffix)
+          : statefulTemplate(name, stylesheetSuffix);
 
         const stylesheetFileContents = stylesheetTemplate(name);
 
