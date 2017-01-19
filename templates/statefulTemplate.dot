@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import './{{=it.stylesheetName}}.{{=it.stylesheetSuffix}}';
 
 class {{=it.name}} extends Component {
-    render() {
-        return (
-            <div className="{{=it.name}}">
-                XXX
-            </div>
-        );
-    }
+  render() {
+    return (
+      <div className="{{=it.name}}">
+      </div>
+    );
+  }
 }
 
 {{=it.name}}.propTypes = {
