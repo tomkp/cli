@@ -4,7 +4,6 @@ import './{{=it.stylesheetName}}.{{=it.stylesheetSuffix}}';
 const {{=it.name}} => (props) {
     return (
         <div className="{{=it.name}}">
-            XXX
         </div>
     );
 }
