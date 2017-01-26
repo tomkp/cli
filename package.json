@@ -1,5 +1,5 @@
 {
-  "name": "cli",
+  "name": "tamm",
   "version": "1.0.0",
   "description": "",
   "keywords": [],
@@ -13,6 +13,6 @@
     "i": "^0.3.5"
   },
   "bin": {
-    "react": "./src/react.js"
+    "tamm": "./src/tamm.js"
   }
 }
