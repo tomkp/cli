@@ -1,0 +1,11 @@
+import React from 'react';
+
+import {{=it.name}} from './{{=it.jsFileName}}';
+
+describe('{{=it.name}}', () => {
+
+  it('renders component', () => {
+
+  });
+
+});

@@ -23,6 +23,11 @@ const statelessTemplate = (name, stylesheetName, stylesheetSuffix) => dots.state
     name: name,
 });
 
+const specTemplate = (name, jsFileName) => dots.specTemplate({
+    jsFileName: jsFileName,
+    name: name,
+});
+
 const stylesheetTemplate = (name) => {
     return `.${name} {\n\t\n\n}`;
 };
@@ -48,9 +53,12 @@ program
           ? statelessTemplate(name, stylesheetName, stylesheetSuffix)
           : statefulTemplate(name, stylesheetName, stylesheetSuffix);
 
+        const jsSpecContents = specTemplate(name, jsFileName);
+
         const stylesheetFileContents = stylesheetTemplate(name);
 
         const jsFile = `${stylesheet}/${jsFileName}.js`;
+        const jsSpecFile = `${stylesheet}/${jsFileName}.spec.js`;
         const stylesheetFile = `${stylesheet}/${stylesheetName}.${stylesheetSuffix}`;
 
         if (program.verbose || program.example) {
@@ -62,6 +70,9 @@ program
             fse.outputFile(`./${jsFile}`, jsFileContents, function (err) {
                 if (err) console.log(err);
             });
+            fse.outputFile(`./${jsSpecFile}`, jsSpecContents, function (err) {
+                if (err) console.log(err);
+            })
             fse.outputFile(`./${stylesheetFile}`, stylesheetFileContents, function (err) {
                 if (err) console.log(err);
             })
