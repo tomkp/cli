@@ -30,7 +30,7 @@ const stylesheetTemplate = (name) => {
 
 program
     .arguments('<name>')
-    .option('-t, --test', 'Log the generated components without any changes to the file system')
+    .option('-e, --example', 'Log the generated components without any changes to the file system')
     .option('-s, --stateless', 'Create stateless React component')
     .option('-n --nameless', 'Create js with index filename and css with style filename')
     .option('-v, --verbose')
@@ -53,12 +53,12 @@ program
         const jsFile = `${stylesheet}/${jsFileName}.js`;
         const stylesheetFile = `${stylesheet}/${stylesheetName}.${stylesheetSuffix}`;
 
-        if (program.verbose || program.test) {
+        if (program.verbose || program.example) {
             console.log(`${'-'.repeat(50)}\n${jsFile}:\n${jsFileContents}\n`);
             console.log(`${'-'.repeat(50)}\n${stylesheetFile}:\n${stylesheetFileContents}\n`);
         }
 
-        if (!program.test) {
+        if (!program.example) {
             fse.outputFile(`./${jsFile}`, jsFileContents, function (err) {
                 if (err) console.log(err);
             });
