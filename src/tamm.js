@@ -37,7 +37,7 @@ program
     .arguments('<name>')
     .option('-e, --example', 'Log the generated components without any changes to the file system')
     .option('-s, --stateless', 'Create stateless React component')
-    .option('-n --nameless', 'Create js with index filename and css with style filename')
+    .option('-n, --nameless', 'Create js with index filename and css with style filename')
     .option('-v, --verbose')
     .option('--suffix <suffix>', 'The stylesheet suffix (css, scss, less etc...)')
     .action(function (name) {
