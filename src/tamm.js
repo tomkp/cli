@@ -48,7 +48,7 @@ program
         const jsFileName = program.nameless ? 'index' : name;
         const stylesheetName = program.nameless ? 'style' : i.dasherize(i.underscore(name));
 
-        const stylesheet = i.dasherize(i.underscore(name));
+        const directory = i.dasherize(i.underscore(name));
         const jsFileContents = program.stateless
           ? statelessTemplate(name, stylesheetName, stylesheetSuffix)
           : statefulTemplate(name, stylesheetName, stylesheetSuffix);
@@ -57,9 +57,9 @@ program
 
         const stylesheetFileContents = stylesheetTemplate(name);
 
-        const jsFile = `${stylesheet}/${jsFileName}.js`;
-        const jsSpecFile = `${stylesheet}/${jsFileName}.spec.js`;
-        const stylesheetFile = `${stylesheet}/${stylesheetName}.${stylesheetSuffix}`;
+        const jsFile = `${directory}/${jsFileName}.js`;
+        const jsSpecFile = `${directory}/${jsFileName}.spec.js`;
+        const stylesheetFile = `${directory}/${stylesheetName}.${stylesheetSuffix}`;
 
         if (program.verbose || program.example) {
             console.log(`${'-'.repeat(50)}\n${jsFile}:\n${jsFileContents}\n`);
