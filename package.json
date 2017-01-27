@@ -5,6 +5,14 @@
   "keywords": [],
   "author": "tomkp <tom@tomkp.com> (http://tomkp.com)",
   "license": "MIT",
+  "homepage": "https://github.com/tomkp/tamm",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tomkp/tamm"
+  },
+  "bugs": {
+    "url": "https://github.com/tomkp/tamm/issues"
+  },
   "dependencies": {
     "bluebird": "^3.4.7",
     "commander": "^2.9.0",
