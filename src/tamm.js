@@ -28,10 +28,7 @@ const specTemplate = (name, jsFileName) => dots.specTemplate({
     name: name,
 });
 
-const stylesheetTemplate = (name) => {
-    return `.${name} {\n\t\n\n}`;
-};
-
+const stylesheetTemplate = (name) => dots.stylesheetTemplate({ name: name });
 
 program
     .arguments('<name>')
