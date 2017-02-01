@@ -60,6 +60,7 @@ program
 
     if (program.verbose || program.example) {
       console.log(`${'-'.repeat(50)}\n${jsFile}:\n${jsFileContents}\n`);
+      console.log(`${'-'.repeat(50)}\n${jsSpecFile}:\n${jsSpecContents}\n`);
       console.log(`${'-'.repeat(50)}\n${stylesheetFile}:\n${stylesheetFileContents}\n`);
     }
 
